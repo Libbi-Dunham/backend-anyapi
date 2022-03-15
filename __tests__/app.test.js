@@ -11,4 +11,16 @@ describe('backend-anyapi routes', () => {
   afterAll(() => {
     pool.end();
   });
+
+  it('should create a toy', async () => {
+    const res = await request(app)
+      .post('/api/v1/toys')
+      .send({ product: 'tamagotchi', quantity: 1 });
+
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      product: 'tamagotchi',
+      quantity: 1,
+    });
+  });
 });
