@@ -44,4 +44,19 @@ describe('backend-anyapi routes', () => {
       },
     ]);
   });
+
+  it('should update a toy', async () => {
+    const toy = await Toy.insert({ product: 'tamagotchi', quantity: 1 });
+    const res = await request(app)
+      .patch(`/api/v1/toys/${toy.id}`)
+      .send({ product: 'bopit', quantity: 2 });
+
+    const expected = {
+      id: expect.any(String),
+      product: 'bopit',
+      quantity: 2,
+    };
+    expect(res.body).toEqual(expected);
+    expect(await Toy.getById(toy.id)).toEqual(expected);
+  });
 });
