@@ -3,6 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Toy = require('../lib/models/Toys');
+// const req = require('express/lib/request');
 
 describe('backend-anyapi routes', () => {
   beforeEach(() => {
@@ -29,5 +30,18 @@ describe('backend-anyapi routes', () => {
     const toy = await Toy.insert({ product: 'tamagotchi', quantity: 1 });
     const res = await request(app).get(`/api/v1/toys/${toy.id}`);
     expect(res.body).toEqual(toy);
+  });
+
+  it('should be able to list toys', async () => {
+    await Toy.insert({ product: 'tamagotchi', quantity: 1 });
+    const res = await request(app).get('/api/v1/toys');
+
+    expect(res.body).toEqual([
+      {
+        id: expect.any(String),
+        product: 'tamagotchi',
+        quantity: 1,
+      },
+    ]);
   });
 });
