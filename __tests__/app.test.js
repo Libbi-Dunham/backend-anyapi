@@ -25,6 +25,7 @@ describe('backend-anyapi routes', () => {
     });
   });
 
+
   it('should list a toy by id', async () => {
     const toy = await Toy.insert({ product: 'tamagotchi', quantity: 1 });
     const res = await request(app).get(`/api/v1/toys/${toy.id}`);
