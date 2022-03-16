@@ -59,4 +59,11 @@ describe('backend-anyapi routes', () => {
     expect(res.body).toEqual(expected);
     expect(await Toy.getById(toy.id)).toEqual(expected);
   });
+
+  it('should be able to delete a toy', async () => {
+    const toy = await Toy.insert({ product: 'tamagotchi', quantity: 2 });
+    const res = await request(app).delete(`/api/v1/toys/${toy.id}`);
+    expect(res.body).toEqual(toy);
+    expect(await Toy.getById(toy.id)).toBeNull();
+  });
 });
