@@ -3,7 +3,6 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Toy = require('../lib/models/Toys');
-// const req = require('express/lib/request');
 
 describe('backend-anyapi routes', () => {
   beforeEach(() => {
