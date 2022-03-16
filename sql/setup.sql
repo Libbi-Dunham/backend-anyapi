@@ -6,5 +6,4 @@ CREATE TABLE toys (
     id BIGINT GENERATED ALWAYS AS IDENTITY,
     product TEXT NOT NULL,
     quantity INT NOT NULL
-
-),
+);
